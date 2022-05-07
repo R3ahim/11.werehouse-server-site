@@ -122,7 +122,7 @@ async function run() {
         app.delete('/stockService/:id',verifyJWT, async (req, res) => {
             const id = req.params.id;
             const query = { _id: ObjectId(id) };
-            const result = await orderCollection.deleteOne(query);
+            const result = await newStockServiceCollection.deleteOne(query);
             res.send(result);
         });
 
