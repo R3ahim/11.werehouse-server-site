@@ -90,7 +90,8 @@ async function run() {
                     quantity: updateData.quantity,
                     stock: updateData.stock,
                     subName: updateData.subName,
-                    img: updateData.img
+                    img: updateData.img,
+                    email:updateData.email
                 }
             }
             const result = await newStockServiceCollection.updateOne(filter, udatedDoc, option)
@@ -108,7 +109,8 @@ async function run() {
                     description: updateData.description,
                     quantity: updateData.quantity,
                     subName: updateData.subName,
-                    img: updateData.img
+                    img: updateData.img,
+                    email:updateData.email
                 }
             }
             const result = await newStockServiceCollection.updateOne(filter, udatedDoc, option)
