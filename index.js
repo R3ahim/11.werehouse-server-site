@@ -37,7 +37,7 @@ async function run() {
     try {
         await client.connect();
         const newStockServiceCollection = client.db('stockingService').collection('stock');
-        const orderCollection = client.db('stockingService').collection('stockOrder');
+        const loveOrderCollection = client.db('stockingService').collection('stockloveOrder');
 
         // AUTH
         app.post('/login', async (req, res) => {
@@ -122,29 +122,29 @@ async function run() {
         app.delete('/stockService/:id',verifyJWT, async (req, res) => {
             const id = req.params.id;
             const query = { _id: ObjectId(id) };
-            const result = await orderCollection.deleteOne(query);
+            const result = await loveOrderCollection.deleteOne(query);
             res.send(result);
         });
 
-        // Order Collection API
+        // loveOrder Collection API
 
-        app.get('/order', verifyJWT, async (req, res) => {
+        app.get('/love', verifyJWT, async (req, res) => {
             const decodedEmail = req.decoded.email;
             const email = req.query.email;
             if (email === decodedEmail) {
                 const query = { email: email };
-                const cursor = orderCollection.find(query);
-                const orders = await cursor.toArray();
-                res.send(orders);
+                const cursor = loveOrderCollection.find(query);
+                const loveOrders = await cursor.toArray();
+                res.send(loveOrders);
             }
             else {
                 res.status(403).send({ message: 'forbidden access' })
             }
         })
 
-        app.post('/order', async (req, res) => {
-            const order = req.body;
-            const result = await orderCollection.insertOne(order);
+        app.post('/love', async (req, res) => {
+            const loveOrder = req.body;
+            const result = await loveOrderCollection.insertOne(loveOrder);
             res.send(result);
         })
 
